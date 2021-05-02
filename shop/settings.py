@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -42,6 +43,11 @@ INSTALLED_APPS = [
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
     'user_operation.apps.UserOperationConfig',
+    'crispy_forms',
+    'django.contrib.admin',
+    'xadmin',
+    'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -120,10 +126,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+# LANGUAGE_CODE = 'en-us'
+#
+# TIME_ZONE = 'UTC'
+# 设置时区
+LANGUAGE_CODE = 'zh-hans'  # 中文支持，django1.8以后支持；1.8以前是zh-cn
+TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 
 USE_L10N = True
@@ -134,6 +142,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
